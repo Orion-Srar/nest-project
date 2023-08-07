@@ -1,4 +1,6 @@
-import {Entity, PrimaryGeneratedColumn, Column} from 'typeorm';
+import {Entity, PrimaryGeneratedColumn, Column, OneToMany} from 'typeorm';
+
+import {Animal} from "../animal/animal.entity";
 
 @Entity()
 export class User {
@@ -19,4 +21,7 @@ export class User {
 
     @Column({type: 'varchar', nullable: false})
     password: string;
+
+    @OneToMany( () => Animal, (animal: Animal) => animal.user, {cascade: true})
+    animal: Animal[];
 }

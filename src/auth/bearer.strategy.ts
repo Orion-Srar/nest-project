@@ -14,18 +14,19 @@ export class BearerStrategy extends PassportStrategy(Strategy, 'bearer') {
     ) {
         super({
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-                secretOrKey: process.env.JWT_SECRET_KEY || 'Secret',
+            secretOrKey: process.env.JWT_SECRET_KEY || 'Secret',
         });
     }
+
     async validate(token: string): Promise<any> {
         let user: User;
         try {
             const payload = await this.jwtService.verify(token);
             const user = await this.authService.validateUser(payload.id)
-        }catch (err) {
+            return user;
+        } catch (err) {
             console.log(new Date().toISOString(), token);
             throw new UnauthorizedException();
         }
-        return user;
     }
 }
