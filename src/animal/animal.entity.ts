@@ -1,4 +1,4 @@
-import {Column, Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn} from "typeorm";
+import {Column, Entity, PrimaryGeneratedColumn, ManyToOne} from "typeorm";
 import {User} from "../user/user.entity";
 
 @Entity()
@@ -18,7 +18,6 @@ export class Animal {
     @Column()
     age: string
 
-    @OneToOne(()=> User)
-    @JoinColumn()
+    @ManyToOne( () => User, (entity) => entity.animals)
     user: User
 }

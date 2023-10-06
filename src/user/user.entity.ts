@@ -1,6 +1,7 @@
-import {Entity, PrimaryGeneratedColumn, Column, OneToMany} from 'typeorm';
+import {Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany} from 'typeorm';
 
 import {Animal} from "../animal/animal.entity";
+import {Car} from "../car/car.entity";
 
 @Entity()
 export class User {
@@ -22,6 +23,9 @@ export class User {
     @Column({type: 'varchar', nullable: false})
     password: string;
 
-    @OneToMany( () => Animal, (animal: Animal) => animal.user, {cascade: true})
-    animal: Animal[];
+    @OneToMany( () => Animal, (entity) => entity.user, {cascade: true})
+    animals: Animal[];
+
+    @ManyToMany( () => Car, (entity) => entity.users)
+    cars: Car[];
 }

@@ -1,17 +1,18 @@
-import {ApiProperty} from "@nestjs/swagger";
-import {IsEnum, IsOptional, IsString} from "class-validator";
+import { ApiProperty } from '@nestjs/swagger';
+import { IsEnum, IsOptional, IsString } from 'class-validator';
 
 export class PublicUserInfoDto {
     @ApiProperty()
     @IsString()
     @IsOptional()
-    @IsEnum(['userName', 'age'])
+    @IsEnum(['userName', 'age', 'city', 'animalName'])
     sort: string;
 
     @ApiProperty()
     @IsString()
     @IsOptional()
-    order: string;
+    @IsEnum(['ASC', 'DESC'])
+    order: 'ASC' | 'DESC';
 
     @ApiProperty()
     @IsString()
@@ -21,20 +22,20 @@ export class PublicUserInfoDto {
     @ApiProperty()
     @IsString()
     @IsOptional()
-    status: string;
-
-    @ApiProperty()
-    @IsString()
-    @IsOptional()
     page: string;
 
     @ApiProperty()
     @IsString()
     @IsOptional()
-    limit: string
+    limit: string;
 
     @ApiProperty()
     @IsString()
     @IsOptional()
-    class: string
+    status: string;
+
+    @ApiProperty()
+    @IsString()
+    @IsOptional()
+    class: string;
 }
